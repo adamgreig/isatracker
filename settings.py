@@ -76,4 +76,5 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.admin',
     'isatracker.funds',
+    'isatracker.isas',
 )

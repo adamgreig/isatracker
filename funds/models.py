@@ -6,8 +6,6 @@ import BeautifulSoup
 class Fund(models.Model):
     name = models.CharField(max_length=100)
     url = models.URLField("URL", verify_exists=False)
-    def fetch_latest_price(self):
-        pass
     def latest_price(self):
         return self.fundprice_set.latest('date').price
     def __unicode__(self):
