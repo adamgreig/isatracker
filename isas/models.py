@@ -8,8 +8,13 @@ class ISA(models.Model):
     def __unicode__(self):
         return self.name
 
+    class Meta:
+        verbose_name = "ISA"
+        verbose_name_plural = "ISAs"
+
 class ISAFund(models.Model):
     fund = models.ForeignKey('funds.Fund')
     isa = models.ForeignKey(ISA)
     quantity = models.FloatField()
     price = models.FloatField()
+
