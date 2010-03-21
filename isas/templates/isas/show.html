@@ -1,0 +1,41 @@
+<h1>{{ isa.name }}</h1>
+<strong>Created:</strong> {{ isa.created.isoformat }}<br />
+<strong>Current Value:</strong> {{ isa.latest_value }}<br />
+<br />
+{% if isa.isafund_set.all %}
+<table>
+    <tr>
+        <th>Fund</th>
+        <th>Quantity</th>
+        <th>Initial Price</th>
+        <th>Latest Price</th>
+        <th colspan="2">Latest Profit</th>
+    </tr>
+    {% for isafund in isa.isafund_set.all %}
+    <tr>
+        <td>
+            <a href="{% url isatracker.funds.views.show isafund.fund.id %}">
+                {{ isafund.fund.name }}
+            </a>
+        </td>
+        <td>
+            {{ isafund.quantity }}
+        </td>
+        <td>
+            &pound;{{ isafund.price }}
+        </td>
+        <td>
+            &pound;{{ isafund.fund.latest_price }}
+        </td>
+        <td>
+            &pound;{{ isafund.latest_profit|stringformat:".2f" }}
+        </td>
+        <td>
+            ({{ isafund.latest_profit_per_cent|stringformat:".2f" }}%)
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>No funds associated with this ISA.</p>
+{% endif %}

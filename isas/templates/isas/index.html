@@ -1,0 +1,26 @@
+<h1>ISAs</h1>
+{% if isas %}
+<table>
+    <tr>
+        <th>Name</th><th>Created</th><th>Latest Value</th>
+    </tr>
+    {% for isa in isas %}
+    <tr>
+        <td>
+            <a href="{% url isatracker.isas.views.show isa.id %}"
+                title="{{ isa.name }}">
+                {{ isa.name }}
+            </a>
+        </td>
+        <td>
+            {{ isa.created.isoformat }}
+        </td>
+        <td>
+            {{ isa.latest_value }}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>No ISAs found in database.</p>
+{% endif %}
