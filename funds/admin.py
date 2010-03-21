@@ -8,6 +8,7 @@ class FundPriceInline(admin.TabularInline):
 class FidelityFundAdmin(admin.ModelAdmin):
     fields = ['name', 'url', 'isin']
     inlines = [FundPriceInline]
+    list_display = ('name', 'url')
 
 admin.site.register(FidelityFund, FidelityFundAdmin)
 

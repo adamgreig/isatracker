@@ -66,9 +66,7 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'isatracker.urls'
 
 TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
+    '/home/adam/Code/Python/isatracker/templates',
 )
 
 INSTALLED_APPS = (
