@@ -5,7 +5,7 @@ import BeautifulSoup
 
 class Fund(models.Model):
     name = models.CharField(max_length=100)
-    url = models.URLField(verify_exists=False)
+    url = models.URLField("URL", verify_exists=False)
     def get_latest_price(self):
         pass
     def __unicode__(self):
@@ -13,13 +13,13 @@ class Fund(models.Model):
 
 class FundPrice(models.Model):
     fund = models.ForeignKey(Fund)
-    date = models.DateField(auto_now_add=True)
+    date = models.DateField()
     price = models.FloatField()
     def __unicode__(self):
         return self.date.isoformat() + ": " + str(self.price)
 
 class FidelityFund(Fund):
-    isin = models.CharField(max_length=12)
+    isin = models.CharField("ISIN", max_length=12)
     def get_latest_price(self):
         page = urllib2.urlopen(self.url)
         soup = BeautifulSoup.BeautifulSoup(page)
