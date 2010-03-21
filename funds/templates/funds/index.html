@@ -1,0 +1,28 @@
+<h1>Funds</h1>
+{% if funds %}
+<table>
+    <tr>
+        <th>Name</th><th>Link</th><th>Latest Price</th>
+    </tr>
+    {% for fund in funds %}
+        <tr>
+            <td>
+                <a href="{% url isatracker.funds.views.show fund.id %}" 
+                    title="{{ fund.name }}">
+                    {{ fund.name }}
+                </a>
+            </td>
+            <td>
+                <a href="{{ fund.url }}" title="{{ fund.name }} website">
+                    Link
+                </a>
+            </td>
+            <td>
+                {{ fund.latest_price }}
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+{% else %}
+    <p>No funds found in database.</p>
+{% endif %}

@@ -1,0 +1,20 @@
+<h1>{{ fund.name }}</h1>
+<strong>URL:</strong> <a href="{{ fund.url }}">{{ fund.url }}</a><br />
+<strong>Latest price:</strong> {{ fund.latest_price }}<br />
+<br />
+{% if fund.fundprice_set.all %}
+<table>
+    <tr>
+        <th>Date</th>
+        <th>Price</th>
+    </tr>
+    {% for fundprice in fund.fundprice_set.all %}
+    <tr>
+        <td>{{ fundprice.date.isoformat }}</td>
+        <td>{{ fundprice.price }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>No historic prices found.</p>
+{% endif %}
