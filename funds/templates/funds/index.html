@@ -1,8 +1,11 @@
-<h1>Funds</h1>
+{% extends "base_content.html" %}
+{% block title %}View funds | ISA Tracker{% endblock %}
+{% block header %}<h1>Funds</h1>{% endblock %}
+{% block content %}
 {% if funds %}
 <table>
     <tr>
-        <th>Name</th><th>Link</th><th>Latest Price</th>
+        <th>Name</th><th>URL</th><th>Latest Price</th>
     </tr>
     {% for fund in funds %}
         <tr>
@@ -26,3 +29,8 @@
 {% else %}
     <p>No funds found in database.</p>
 {% endif %}
+<br /><p>
+<a href="{% url isatracker.isas.views.index %}" title="ISAs">View ISAs</a>
+</p>
+{% endblock %}
+

@@ -1,0 +1,25 @@
+body {
+    font-family: "Liberation Sans", "Verdana", sans;
+}
+
+#header {
+    width: 80%;
+    background-color: #33f;
+    color: #fff;
+    padding: 5px;
+    padding-left: 30px;
+}
+
+#content {
+    width: 75%;
+    margin-top: 10px;
+    background-color: #ddf;
+    color: #222;
+    padding: 15px;
+}
+
+#content table td {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+

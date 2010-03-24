@@ -1,6 +1,20 @@
-<h1>{{ isa.name }}</h1>
-<strong>Created:</strong> {{ isa.created.isoformat }}<br />
-<strong>Current Value:</strong> {{ isa.latest_value }}<br />
+{% extends "base_content.html" %}
+{% block title %}{{ isa.name }} | ISA Tracker{% endblock %}
+{% block header %}<h1>Viewing ISA '{{ isa.name }}'</h1>{% endblock %}
+{% block content %}
+<strong>Created: </strong>
+{{ isa.created.isoformat }}<br />
+
+<strong>Initial Value: </strong>
+&pound;{{ isa.initial_value|stringformat:".2f" }}<br />
+
+<strong>Current Value: </strong>
+&pound;{{ isa.latest_value|stringformat:".2f" }}<br />
+
+<strong>Current Profit: </strong>
+&pound;{{ isa.latest_profit|stringformat:".2f" }}
+({{ isa.latest_profit_per_cent|stringformat:".2f" }}%)<br />
+
 <br />
 {% if isa.isafund_set.all %}
 <table>
@@ -19,13 +33,13 @@
             </a>
         </td>
         <td>
-            {{ isafund.quantity }}
+            {{ isafund.quantity|stringformat:".2f" }}
         </td>
         <td>
-            &pound;{{ isafund.price }}
+            &pound;{{ isafund.price|stringformat:".2f" }}
         </td>
         <td>
-            &pound;{{ isafund.fund.latest_price }}
+            &pound;{{ isafund.fund.latest_price|stringformat:".2f" }}
         </td>
         <td>
             &pound;{{ isafund.latest_profit|stringformat:".2f" }}
@@ -39,3 +53,6 @@
 {% else %}
 <p>No funds associated with this ISA.</p>
 {% endif %}
+<br />
+<p><a href="{% url isatracker.isas.views.index %}" title="Back">Back</a></p>
+{% endblock %}

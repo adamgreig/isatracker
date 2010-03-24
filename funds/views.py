@@ -2,6 +2,7 @@ from isatracker.funds.models import Fund, FundPrice, FidelityFund
 from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponse
 from datetime import date
+from pygooglechart import Chart, SimpleLineChart, Axis
 
 def index(request):
     funds = Fund.objects.all()
@@ -9,7 +10,18 @@ def index(request):
 
 def show(request, fund_id):
     fund = get_object_or_404(Fund, pk=fund_id)
-    return render_to_response('funds/show.html', {'fund': fund})
+    prices = fund.fundprice_set.order_by('-date')
+    data = []
+    for price in prices:
+        data.append(price.price)
+    data.reverse()
+    chart = SimpleLineChart(500, 200, y_range=[min(data), max(data)])
+    chart.add_data(data)
+    chart.set_colours(['0000FF'])
+    chart.fill_solid('bg', 'DDDDFF')
+    url = chart.get_url()
+    return render_to_response('funds/show.html',
+            {'fund': fund, 'prices': prices, 'graph_url': url})
 
 def update_fidelity_prices():
     funds = FidelityFund.objects.all()

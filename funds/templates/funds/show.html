@@ -1,6 +1,13 @@
-<h1>{{ fund.name }}</h1>
-<strong>URL:</strong> <a href="{{ fund.url }}">{{ fund.url }}</a><br />
-<strong>Latest price:</strong> {{ fund.latest_price }}<br />
+{% extends "base_content.html" %}
+{% block title %}{{ fund.name }} | ISA Tracker{% endblock %}
+{% block header %}<h1>Viewing fund '{{ fund.name }}'</h1>{% endblock %}
+{% block content %}
+<p>
+    <strong>URL:</strong> <a href="{{ fund.url }}">Link</a><br />
+    <strong>Latest price:</strong> {{ fund.latest_price }}<br />
+</p><p>
+    <img src="{{ graph_url }}" alt="price graph" />
+</p>
 <br />
 {% if fund.fundprice_set.all %}
 <table>
@@ -8,13 +15,18 @@
         <th>Date</th>
         <th>Price</th>
     </tr>
-    {% for fundprice in fund.fundprice_set.all %}
+    {% for fundprice in prices %}
     <tr>
         <td>{{ fundprice.date.isoformat }}</td>
-        <td>{{ fundprice.price }}</td>
+        <td>{{ fundprice.price|stringformat:".4f" }}</td>
     </tr>
     {% endfor %}
 </table>
 {% else %}
 <p>No historic prices found.</p>
 {% endif %}
+<br /><p>
+<a href="{% url isatracker.funds.views.index %}" title="Back">Back</a>
+</p>
+{% endblock %}
+

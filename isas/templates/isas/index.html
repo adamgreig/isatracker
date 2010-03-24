@@ -1,8 +1,15 @@
-<h1>ISAs</h1>
+{% extends "base_content.html" %}
+{% block title %}View ISAs | ISA Tracker{% endblock %}
+{% block header %}<h1>ISAs</h1>{% endblock %}
+{% block content %}
 {% if isas %}
 <table>
     <tr>
-        <th>Name</th><th>Created</th><th>Latest Value</th>
+        <th>Name</th>
+        <th>Created</th>
+        <th>Initial Value</th>
+        <th>Latest Value</th>
+        <th>Latest Profit</th>
     </tr>
     {% for isa in isas %}
     <tr>
@@ -16,7 +23,14 @@
             {{ isa.created.isoformat }}
         </td>
         <td>
-            {{ isa.latest_value }}
+            &pound;{{ isa.initial_value|stringformat:".2f" }}
+        </td>
+        <td>
+            &pound;{{ isa.latest_value|stringformat:".2f" }}
+        </td>
+        <td>
+            &pound;{{ isa.latest_profit|stringformat:".2f" }} 
+            ({{ isa.latest_profit_per_cent|stringformat:".2f" }}%)
         </td>
     </tr>
     {% endfor %}
@@ -24,3 +38,8 @@
 {% else %}
 <p>No ISAs found in database.</p>
 {% endif %}
+<br />
+<p>
+<a href="{% url isatracker.funds.views.index %}" title="Funds">View Funds</a>
+</p>
+{% endblock %}
