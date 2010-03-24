@@ -2,7 +2,7 @@
 {% block title %}{{ isa.name }} | ISA Tracker{% endblock %}
 {% block header %}<h1>Viewing ISA '{{ isa.name }}'</h1>{% endblock %}
 {% block content %}
-<strong>Created: </strong>
+<p><strong>Created: </strong>
 {{ isa.created.isoformat }}<br />
 
 <strong>Initial Value: </strong>
@@ -14,7 +14,10 @@
 <strong>Current Profit: </strong>
 &pound;{{ isa.latest_profit|stringformat:".2f" }}
 ({{ isa.latest_profit_per_cent|stringformat:".2f" }}%)<br />
-
+</p>
+<p>
+<img src="{{ chart_url }}" alt="ISA value chart" />
+</p>
 <br />
 {% if isa.isafund_set.all %}
 <table>

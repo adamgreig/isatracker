@@ -19,6 +19,10 @@ def show(request, fund_id):
     chart.add_data(data)
     chart.set_colours(['0000FF'])
     chart.fill_solid('bg', 'DDDDFF')
+    chart.set_axis_labels(Axis.LEFT, [min(data), max(data)])
+    start_date = prices[len(prices) - 1].date.isoformat()
+    end_date = prices[0].date.isoformat()
+    chart.set_axis_labels(Axis.BOTTOM, [start_date, end_date])
     url = chart.get_url()
     return render_to_response('funds/show.html',
             {'fund': fund, 'prices': prices, 'graph_url': url})
